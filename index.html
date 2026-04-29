@@ -285,9 +285,193 @@
   .audience-item { max-width: 200px; }
   .audience-item-title { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
   .audience-item-sub { font-size: 13px; color: var(--brown-mid); font-weight: 300; line-height: 1.5; }
+
+  /* ── MODAL OVERLAY ────────────────────────────── */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(67,51,43,0.55);
+    align-items: center; justify-content: center;
+    padding: 24px;
+    animation: fadeIn .25s ease both;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal-box {
+    background: var(--white);
+    width: 100%; max-width: 640px;
+    max-height: 90vh; overflow-y: auto;
+    animation: fadeUp .3s ease both;
+    position: relative;
+  }
+
+  .modal-header {
+    background: var(--brown); color: var(--cream);
+    padding: 36px 48px 28px;
+  }
+  .modal-body { padding: 40px 48px; }
+
+  .form-row { margin-bottom: 20px; }
+  .form-label {
+    display: block;
+    font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    font-weight: 500; color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+  .form-input {
+    width: 100%; background: var(--cream); color: var(--brown);
+    border: 1px solid var(--border);
+    padding: 13px 16px; font-family: 'Outfit', sans-serif;
+    font-size: 14px; font-weight: 300; outline: none;
+    transition: border-color .2s;
+    -webkit-appearance: none; appearance: none;
+    border-radius: 0;
+  }
+  .form-input:focus { border-color: var(--brown); background: var(--white); }
+  .form-input::placeholder { color: var(--brown-xl); }
+  select.form-input { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239C7B6E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+
+  .form-two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .rgpd-box {
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    background: var(--cream);
+    margin-bottom: 20px;
+  }
+  .rgpd-check-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .rgpd-check-row:last-child { margin-bottom: 0; }
+  .rgpd-checkbox {
+    width: 18px; height: 18px; min-width: 18px;
+    border: 1px solid var(--border-mid);
+    background: var(--white); cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+    margin-top: 1px; transition: all .2s; outline: none;
+  }
+  .rgpd-checkbox:checked {
+    background: var(--brown); border-color: var(--brown);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23F8F2F0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center;
+  }
+  .rgpd-text { font-size: 12px; color: var(--brown-mid); line-height: 1.55; font-weight: 300; }
+  .rgpd-text a { color: var(--brown); text-decoration: underline; }
+  .rgpd-required { color: var(--brown-light); font-size: 11px; }
+
+  .modal-close {
+    position: absolute; top: 16px; right: 20px;
+    background: none; border: none; cursor: pointer;
+    color: rgba(248,242,240,.6); font-size: 22px; line-height: 1;
+    transition: color .2s; padding: 4px;
+  }
+  .modal-close:hover { color: var(--cream); }
+
+  .form-success {
+    display: none; text-align: center; padding: 48px 32px;
+  }
+  .form-success.show { display: block; }
+  .form-error {
+    font-size: 13px; color: #a94442;
+    background: #fdf2f2; border: 1px solid #f5c6cb;
+    padding: 12px 16px; margin-bottom: 20px; display: none;
+  }
+  .form-error.show { display: block; }
 </style>
 </head>
 <body>
+
+<!-- ═══════ MODAL MENTORÍA ════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="mentor-modal" onclick="closeMentorModal(event)">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeMentorModal()" aria-label="Cerrar">&times;</button>
+      <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.6;margin-bottom:12px;">Mentoría Personalizada</div>
+      <h2 id="modal-title" class="serif" style="font-size:32px;font-weight:300;font-style:italic;line-height:1.2;margin-bottom:8px;">Reserva tu sesión 1 a 1.</h2>
+      <p style="font-size:13px;opacity:.65;font-weight:300;">Un mentor certificado Sendya se pondrá en contacto contigo en menos de 24h.</p>
+    </div>
+    <div class="modal-body">
+      <div class="form-success" id="form-success">
+        <div style="font-size:40px;margin-bottom:20px;">✦</div>
+        <h3 class="serif" style="font-size:28px;font-weight:300;font-style:italic;margin-bottom:12px;">¡Solicitud recibida!</h3>
+        <p style="font-size:14px;color:var(--brown-mid);font-weight:300;line-height:1.6;max-width:340px;margin:0 auto 28px;">Tu mentor Sendya revisará tu perfil y te escribirá en menos de 24 horas para acordar la sesión.</p>
+        <button class="btn btn-dark" onclick="closeMentorModal()" style="font-size:12px;">Cerrar</button>
+      </div>
+      <div id="form-wrap">
+        <div class="form-error" id="form-error">Hubo un error al enviar. Por favor inténtalo de nuevo.</div>
+        <div class="form-two">
+          <div class="form-row">
+            <label class="form-label" for="m-nombre">Nombre <span class="rgpd-required">*</span></label>
+            <input class="form-input" type="text" id="m-nombre" name="nombre" placeholder="Tu nombre"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="m-apellido">Apellidos <span class="rgpd-required">*</span></label>
+            <input class="form-input" type="text" id="m-apellido" name="apellidos" placeholder="Tus apellidos"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="m-email">Correo electrónico <span class="rgpd-required">*</span></label>
+          <input class="form-input" type="text" id="m-email" name="email" placeholder="tu@email.com"/>
+        </div>
+        <div class="form-two">
+          <div class="form-row">
+            <label class="form-label" for="m-telefono">Teléfono</label>
+            <input class="form-input" type="text" id="m-telefono" name="telefono" placeholder="+34 600 000 000"/>
+          </div>
+          <div class="form-row">
+            <label class="form-label" for="m-perfil">Perfil <span class="rgpd-required">*</span></label>
+            <select class="form-input" id="m-perfil" name="perfil">
+              <option value="" disabled selected>Selecciona...</option>
+              <option>Estudiante universitario/a</option>
+              <option>En transición laboral</option>
+              <option>Empresa / RRHH</option>
+              <option>Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="m-fase">Fase completada</label>
+          <select class="form-input" id="m-fase" name="fase_completada">
+            <option value="">Sin fase completada aún</option>
+            <option>Fase 01 — Interior</option>
+            <option>Fase 02 — Exploración</option>
+            <option>Fase 03 — Plan de Acción</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="m-mensaje">¿Qué esperas de la mentoría?</label>
+          <textarea class="form-input" id="m-mensaje" name="mensaje" rows="3" placeholder="Cuéntanos brevemente en qué punto estás y qué buscas conseguir..."></textarea>
+        </div>
+        <div class="rgpd-box">
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brown-light);margin-bottom:14px;font-weight:500;">Protección de datos · RGPD</div>
+          <div class="rgpd-check-row">
+            <input class="rgpd-checkbox" type="checkbox" id="rgpd-base" name="rgpd_base"/>
+            <label class="rgpd-text" for="rgpd-base">
+              <strong style="font-weight:500;">Acepto el tratamiento de mis datos personales</strong> <span class="rgpd-required">*</span><br>
+              He leído y acepto la <a href="#" onclick="return false;">Política de Privacidad</a>. Sendya tratará tus datos para gestionar la solicitud de mentoría en base a tu consentimiento expreso (art. 6.1.a RGPD). Puedes ejercer tus derechos de acceso, rectificación, supresión y portabilidad escribiendo a <a href="mailto:privacidad@sendya.com">privacidad@sendya.com</a>.
+            </label>
+          </div>
+          <div class="rgpd-check-row">
+            <input class="rgpd-checkbox" type="checkbox" id="rgpd-comercial" name="rgpd_comercial"/>
+            <label class="rgpd-text" for="rgpd-comercial">
+              <strong style="font-weight:500;">Comunicaciones comerciales</strong> (opcional)<br>
+              Acepto recibir información sobre programas, recursos y novedades de Sendya. Puedes darte de baja en cualquier momento.
+            </label>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--brown-xl);margin-bottom:24px;line-height:1.6;">
+          Los campos marcados con <span class="rgpd-required">*</span> son obligatorios. Responsable: Sendya · Finalidad: gestión de solicitudes de mentoría · Legitimación: consentimiento · Derechos: <a href="mailto:privacidad@sendya.com" style="color:var(--brown-light);">privacidad@sendya.com</a>
+        </p>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <button class="btn btn-dark" id="btn-submit" onclick="submitMentorForm()" style="font-size:12px;">Enviar solicitud →</button>
+          <button class="btn btn-ghost" onclick="closeMentorModal()" style="font-size:12px;">Cancelar</button>
+          <div class="spinner" id="submit-spinner" style="display:none;width:20px;height:20px;margin:0;border-width:1.5px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════ NAV ═══════════════════════════════════════════════════════════ -->
 <nav>
@@ -395,7 +579,7 @@
       <div class="title">¿Quieres ir más profundo con una sesión 1 a 1?</div>
       <div class="sub">Un mentor certificado Sendya analiza tu perfil único contigo.</div>
     </div>
-    <button class="btn btn-light">Reservar Mentoría →</button>
+    <button class="btn btn-light" onclick="openMentorModal()">Reservar Mentoría →</button>
   </div>
 
 </section>
@@ -473,7 +657,7 @@
       <div class="title">¿Quieres profundizar con una sesión 1 a 1?</div>
       <div class="sub">Un mentor certificado Sendya analiza tu perfil contigo.</div>
     </div>
-    <button class="btn btn-light">Reservar Mentoría →</button>
+    <button class="btn btn-light" onclick="openMentorModal()">Reservar Mentoría →</button>
   </div>
 
 </section>
@@ -591,7 +775,7 @@
       <div class="title">¿Quieres profundizar con una sesión 1 a 1?</div>
       <div class="sub">Un mentor certificado Sendya analiza tu código contigo.</div>
     </div>
-    <button class="btn btn-light">Reservar Mentoría →</button>
+    <button class="btn btn-light" onclick="openMentorModal()">Reservar Mentoría →</button>
   </div>
 </section>
 
@@ -851,6 +1035,99 @@ PRÓXIMA ACCIÓN: Dedica 30 minutos hoy a escribir 3 momentos en que sentiste qu
 
     showPage('map');
   }
+
+  /* ── Modal Mentoría ─────────────────────────────────────────────────────── */
+  function openMentorModal() {
+    const modal = document.getElementById('mentor-modal');
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Pre-fill fase if user has completed phase 1
+    if (state.userCode) {
+      const faseEl = document.getElementById('m-fase');
+      if (faseEl) faseEl.value = 'Fase 01 — Interior';
+    }
+  }
+
+  function closeMentorModal(e) {
+    if (e && e.target !== document.getElementById('mentor-modal')) return;
+    document.getElementById('mentor-modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  async function submitMentorForm() {
+    // Validate required fields
+    const nombre   = document.getElementById('m-nombre').value.trim();
+    const apellido = document.getElementById('m-apellido').value.trim();
+    const email    = document.getElementById('m-email').value.trim();
+    const perfil   = document.getElementById('m-perfil').value;
+    const rgpd     = document.getElementById('rgpd-base').checked;
+    const errorEl  = document.getElementById('form-error');
+
+    if (!nombre || !apellido || !email || !perfil || !rgpd) {
+      errorEl.textContent = !rgpd
+        ? 'Debes aceptar la política de privacidad para continuar.'
+        : 'Por favor completa todos los campos obligatorios (*)';
+      errorEl.classList.add('show');
+      errorEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent = 'Por favor introduce un correo electrónico válido.';
+      errorEl.classList.add('show');
+      return;
+    }
+    errorEl.classList.remove('show');
+
+    // Show spinner, disable button
+    const btn = document.getElementById('btn-submit');
+    const spinner = document.getElementById('submit-spinner');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    spinner.style.display = 'block';
+
+    // Build form data
+    const formData = {
+      nombre,
+      apellidos:       document.getElementById('m-apellido').value.trim(),
+      email,
+      telefono:        document.getElementById('m-telefono').value.trim(),
+      perfil,
+      fase_completada: document.getElementById('m-fase').value,
+      codigo_sendya:   state.userCode || '—',
+      mensaje:         document.getElementById('m-mensaje').value.trim(),
+      rgpd_base:       'Sí — Acepta política de privacidad',
+      rgpd_comercial:  document.getElementById('rgpd-comercial').checked ? 'Sí — Acepta comunicaciones' : 'No',
+    };
+
+    try {
+      const res = await fetch('https://formspree.io/f/xdabnkda', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('form-success').classList.add('show');
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      errorEl.textContent = 'Hubo un error al enviar el formulario. Por favor inténtalo de nuevo.';
+      errorEl.classList.add('show');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+      spinner.style.display = 'none';
+    }
+  }
+
+  // Close modal on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.getElementById('mentor-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
 
   /* ── Init ─────────────────────────────────────────────────────────────── */
   showPage('home');
