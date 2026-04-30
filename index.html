@@ -8,245 +8,377 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    /* ── Cream / warm whites ─────────── */
-    --cream:         #F8F2F0;
-    --cream-warm:    #F4EBE5;
-    --cream-deep:    #EDE0D9;
-    --linen:         #E5D5CB;
-    --sand:          #D4BFB3;
-    /* ── Brown family ────────────────── */
-    --brown-pale:    #9E7D6F;
-    --brown-light:   #87655A;
-    --brown-mid:     #6B5044;
-    --brown:         #43332B;
-    --brown-deep:    #2C1F18;
-    /* ── Warm accents ────────────────── */
-    --clay:          #A0624E;
-    --clay-light:    #C4836C;
-    --sienna:        #7A4A38;
-    /* ── Utilities ───────────────────── */
-    --white:         #FFFFFF;
-    --border:        rgba(67,51,43,0.11);
-    --border-mid:    rgba(67,51,43,0.22);
-    --border-strong: rgba(67,51,43,0.36);
-  }
+/* ─── TOKENS ─────────────────────────────────────────────── */
+:root {
+  --cream:         #F8F2F0;
+  --cream-warm:    #F4EBE5;
+  --cream-deep:    #EDE0D9;
+  --linen:         #E5D5CB;
+  --sand:          #D4BFB3;
+  --brown-pale:    #9E7D6F;
+  --brown-light:   #87655A;
+  --brown-mid:     #6B5044;
+  --brown:         #43332B;
+  --brown-deep:    #2C1F18;
+  --clay:          #A0624E;
+  --clay-light:    #C4836C;
+  --sienna:        #7A4A38;
+  --white:         #FFFFFF;
+  --border:        rgba(67,51,43,0.11);
+  --border-mid:    rgba(67,51,43,0.22);
+}
 
-  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-  html { scroll-behavior:smooth; }
-  body {
-    background:var(--cream); color:var(--brown);
-    font-family:'Outfit',sans-serif; font-weight:300;
-    -webkit-font-smoothing:antialiased; overflow-x:hidden;
-  }
-  .serif { font-family:'Cormorant Garamond',serif; }
+/* ─── RESET ──────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--brown);font-family:'Outfit',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+.serif{font-family:'Cormorant Garamond',serif}
 
-  /* ── Animations ───────────────────────────────────── */
-  @keyframes fadeUp  { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
-  @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
-  @keyframes spin    { to{transform:rotate(360deg)} }
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.a1{animation:fadeUp .65s .10s both}
+.a2{animation:fadeUp .65s .22s both}
+.a3{animation:fadeUp .65s .34s both}
+.a4{animation:fadeUp .65s .46s both}
 
-  .a1{animation:fadeUp .65s .10s both}
-  .a2{animation:fadeUp .65s .22s both}
-  .a3{animation:fadeUp .65s .34s both}
-  .a4{animation:fadeUp .65s .46s both}
-  .a5{animation:fadeUp .65s .58s both}
+/* ─── NAV ────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:60px;background:var(--cream);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+}
+.nav-brand{
+  display:flex;flex-direction:column;
+  border:none;background:none;cursor:pointer;text-align:left;padding:0;
+}
+.nav-brand-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:600;color:var(--brown);
+  letter-spacing:.02em;line-height:1;
+}
+.nav-brand-sub{
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brown-pale);font-weight:300;margin-top:2px;
+}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-link{
+  background:none;border:none;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:300;
+  color:var(--brown-mid);letter-spacing:.04em;
+  padding-bottom:2px;border-bottom:1px solid transparent;
+  transition:color .2s,border-color .2s;
+}
+.nav-link:hover{color:var(--brown)}
+.nav-link.active{color:var(--brown);font-weight:500;border-bottom-color:var(--brown)}
 
-  /* ── NAV ──────────────────────────────────────────── */
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:100;
-    height:60px; background:var(--cream);
-    border-bottom:1px solid var(--border);
-    display:flex; align-items:center; justify-content:space-between;
-    padding:0 48px;
-  }
-  .nav-logo {
-    font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600;
-    color:var(--brown); cursor:pointer; letter-spacing:.02em; border:none; background:none;
-  }
-  .nav-links { display:flex; gap:32px; align-items:center; }
-  .nav-link {
-    background:none; border:none; cursor:pointer;
-    font-family:'Outfit',sans-serif; font-size:13px; font-weight:300;
-    color:var(--brown-mid); letter-spacing:.04em;
-    padding-bottom:2px; border-bottom:1px solid transparent;
-    transition:color .2s, border-color .2s;
-  }
-  .nav-link:hover { color:var(--brown); }
-  .nav-link.active { color:var(--brown); font-weight:500; border-bottom-color:var(--brown); }
+/* Hamburger */
+.nav-burger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--brown);transition:all .3s}
+.nav-mobile{
+  display:none;position:fixed;top:60px;left:0;right:0;z-index:99;
+  background:var(--cream);border-bottom:1px solid var(--border);
+  flex-direction:column;padding:16px 0;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile .nav-link{padding:14px 40px;border-bottom:none;font-size:15px}
+.nav-mobile .nav-link:hover{background:var(--cream-warm)}
 
-  /* ── PAGES ────────────────────────────────────────── */
-  .page { display:none; padding-top:60px; }
-  .page.visible { display:block; }
+/* ─── PAGES ──────────────────────────────────────────────── */
+.page{display:none;padding-top:60px}
+.page.visible{display:block}
 
-  /* ── BUTTONS ──────────────────────────────────────── */
-  .btn {
-    display:inline-flex; align-items:center; gap:8px;
-    padding:14px 32px; font-family:'Outfit',sans-serif;
-    font-size:13px; font-weight:500; letter-spacing:.08em;
-    text-transform:uppercase; cursor:pointer; border:none;
-    transition:opacity .2s, transform .15s, background .2s;
-  }
-  .btn:hover { opacity:.84; transform:translateY(-1px); }
-  .btn:disabled { opacity:.35; cursor:not-allowed; transform:none; }
-  .btn-dark  { background:var(--brown); color:var(--cream); }
-  .btn-dark:hover  { background:var(--brown-deep); opacity:1; }
-  .btn-ghost { background:transparent; color:var(--brown); border:1px solid var(--border-mid); }
-  .btn-ghost:hover { background:var(--cream-deep); opacity:1; }
-  .btn-light { background:var(--cream); color:var(--brown); }
-  .btn-light:hover { background:var(--cream-warm); opacity:1; }
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 28px;font-family:'Outfit',sans-serif;
+  font-size:13px;font-weight:500;letter-spacing:.07em;
+  text-transform:uppercase;cursor:pointer;border:none;
+  transition:opacity .2s,transform .15s,background .2s;
+}
+.btn:hover{opacity:.84;transform:translateY(-1px)}
+.btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-dark{background:var(--brown);color:var(--cream)}
+.btn-dark:hover{background:var(--brown-deep);opacity:1}
+.btn-ghost{background:transparent;color:var(--brown);border:1px solid var(--border-mid)}
+.btn-ghost:hover{background:var(--cream-deep);opacity:1}
+.btn-light{background:var(--cream);color:var(--brown)}
+.btn-light:hover{background:var(--cream-warm);opacity:1}
 
-  /* ── MISC ─────────────────────────────────────────── */
-  .tag {
-    display:inline-block; font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; font-weight:500; padding:5px 12px;
-    background:var(--cream-deep); color:var(--brown-mid); border:1px solid var(--border);
-  }
-  .divider { width:40px; height:1px; background:var(--sand); margin:20px 0; }
+/* ─── UTILS ──────────────────────────────────────────────── */
+.tag{
+  display:inline-block;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;font-weight:500;padding:5px 12px;
+  background:var(--cream-deep);color:var(--brown-mid);border:1px solid var(--border);
+}
+.divider{width:40px;height:1px;background:var(--sand);margin:20px 0}
 
-  /* ── LAYOUT ───────────────────────────────────────── */
-  .two-col { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--border); }
-  .col-pad   { padding:80px 64px; }
-  .col-left  { border-right:1px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
-  .col-right { display:flex; flex-direction:column; justify-content:center; }
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.col-pad{padding:72px 56px}
+.col-left{border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.col-right{display:flex;flex-direction:column;justify-content:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400}
 
-  /* ── MENTOR STRIP ─────────────────────────────────── */
-  .mentor-strip {
-    background:var(--brown-deep); color:var(--cream);
-    padding:32px 64px; display:flex; align-items:center;
-    justify-content:space-between; gap:24px; flex-wrap:wrap;
-  }
-  .mentor-strip .ml  { font-size:11px; letter-spacing:.15em; text-transform:uppercase; opacity:.5; margin-bottom:8px; }
-  .mentor-strip .mt  { font-family:'Cormorant Garamond',serif; font-size:24px; font-style:italic; font-weight:300; line-height:1.3; margin-bottom:4px; }
-  .mentor-strip .ms  { font-size:13px; opacity:.6; font-weight:300; }
+/* ─── MENTOR STRIP ───────────────────────────────────────── */
+.mentor-strip{
+  background:var(--brown-deep);color:var(--cream);
+  padding:36px 56px;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;flex-wrap:wrap;
+  border-top:4px solid var(--brown);   /* visual break from section above */
+  clear:both;
+}
+.mentor-strip .ml{font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:8px}
+.mentor-strip .mt{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;font-weight:300;line-height:1.3;margin-bottom:4px}
+.mentor-strip .ms{font-size:13px;opacity:.6;font-weight:300}
 
-  /* ── OPTION PILLS ─────────────────────────────────── */
-  .option-pill {
-    padding:12px 16px; background:transparent; border:1px solid var(--border);
-    cursor:pointer; font-family:'Outfit',sans-serif; font-size:14px;
-    font-weight:300; color:var(--brown-mid); text-align:left;
-    transition:all .2s; width:100%;
-  }
-  .option-pill:hover  { border-color:var(--brown-mid); color:var(--brown); background:var(--cream-deep); }
-  .option-pill.selected { background:var(--brown); color:var(--cream); border-color:var(--brown); }
+/* ─── PHOTO HERO ─────────────────────────────────────────── */
+.hero-photo-wrap{position:relative;overflow:hidden;border-left:1px solid var(--border)}
+.hero-photo-wrap img{width:100%;height:100%;object-fit:cover;filter:sepia(10%) brightness(.97);animation:fadeIn 1s .3s both}
+.hero-photo-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:28px 36px;
+  background:linear-gradient(to top,rgba(44,31,24,.68) 0%,transparent 100%);
+}
 
-  /* ── INPUTS ───────────────────────────────────────── */
-  textarea, .fi {
-    width:100%; color:var(--brown); border:1px solid var(--border);
-    padding:13px 16px; font-family:'Outfit',sans-serif;
-    font-size:14px; font-weight:300; resize:none;
-    transition:border-color .2s; outline:none;
-    -webkit-appearance:none; appearance:none; border-radius:0;
-  }
-  textarea { background:var(--white); font-size:15px; }
-  .fi { background:var(--cream-warm); }
-  textarea:focus, .fi:focus { border-color:var(--brown); background:var(--white); }
-  textarea::placeholder, .fi::placeholder { color:var(--brown-pale); }
-  select.fi {
-    cursor:pointer;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E7D6F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 16px center; padding-right:40px;
-  }
+/* ─── PHOTO STRIP ────────────────────────────────────────── */
+.photo-strip{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--border);height:320px}
+.photo-cell{overflow:hidden;position:relative}
+.photo-cell img{width:100%;height:100%;object-fit:cover;filter:sepia(14%) brightness(.97);transition:transform .6s ease}
+.photo-cell:hover img{transform:scale(1.04)}
+.photo-text{background:var(--brown);color:var(--cream);display:flex;flex-direction:column;justify-content:flex-end;padding:36px}
 
-  /* ── PROGRESS ─────────────────────────────────────── */
-  .prog-wrap { height:2px; background:var(--linen); position:relative; }
-  .prog-fill { position:absolute; left:0; top:0; height:100%; background:var(--brown); transition:width 1s cubic-bezier(.4,0,.2,1); }
+/* ─── PHASE ROWS ─────────────────────────────────────────── */
+.phase-row{display:flex;align-items:center;gap:20px;padding:15px 0;border-bottom:1px solid var(--border)}
+.phase-row:first-child{border-top:1px solid var(--border)}
+.phase-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--sand);min-width:50px}
 
-  /* ── SPINNER ──────────────────────────────────────── */
-  .spinner { width:32px; height:32px; border:1.5px solid var(--sand); border-top-color:var(--brown); border-radius:50%; animation:spin .8s linear infinite; margin:0 auto 24px; }
+/* ─── AUDIENCE ───────────────────────────────────────────── */
+.audience-row{padding:48px 56px;border-bottom:1px solid var(--border);display:flex;gap:0}
+.audience-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);min-width:130px;padding-top:4px}
+.audience-grid{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.audience-item{padding:18px 22px;border-bottom:1px solid var(--border);border-right:1px solid var(--border)}
+.audience-item:nth-child(2n){border-right:none}
+.audience-item:nth-last-child(-n+2){border-bottom:none}
+.audience-item-title{font-size:14px;font-weight:500;margin-bottom:5px}
+.audience-item-sub{font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.5}
 
-  /* ── PHASE ROWS (hero list) ───────────────────────── */
-  .phase-row { display:flex; align-items:center; gap:20px; padding:16px 0; border-bottom:1px solid var(--border); }
-  .phase-row:first-child { border-top:1px solid var(--border); }
-  .phase-num { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; color:var(--sand); min-width:52px; }
+/* ─── MAP GRID ───────────────────────────────────────────── */
+.map-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
+.phase-card{
+  padding:44px 36px;border-right:1px solid var(--border);
+  position:relative;transition:background .3s;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.phase-card:last-child{border-right:none}
+.phase-card.done{background:var(--cream-deep)}
+.phase-card.locked{opacity:.52}
+.phase-badge{position:absolute;top:18px;right:18px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px}
+.phase-badge.done-badge{background:var(--brown);color:var(--cream)}
+.phase-badge.lock-badge{background:var(--cream-deep);border:1px solid var(--border);color:var(--brown-light)}
+.pbullets{list-style:none;margin-top:14px}
+.pbullets li{font-size:13px;font-weight:300;color:var(--brown-mid);padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.pbullets li:last-child{border-bottom:none}
+.pdot{width:4px;height:4px;border-radius:50%;background:var(--brown-pale);flex-shrink:0}
 
-  /* ── PHASE CARDS (map) ────────────────────────────── */
-  .map-grid { display:grid; grid-template-columns:repeat(3,1fr); border-bottom:1px solid var(--border); }
-  .phase-card {
-    padding:48px 40px; border-right:1px solid var(--border);
-    position:relative; transition:background .3s;
-    min-height:500px; display:flex; flex-direction:column; justify-content:space-between;
-  }
-  .phase-card:last-child { border-right:none; }
-  .phase-card.done   { background:var(--cream-deep); }
-  .phase-card.locked { opacity:.52; }
-  .phase-badge { position:absolute; top:20px; right:20px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; }
-  .phase-badge.done-badge { background:var(--brown); color:var(--cream); }
-  .phase-badge.lock-badge { background:var(--cream-deep); border:1px solid var(--border); color:var(--brown-light); }
+/* ─── METHOD PAGE ────────────────────────────────────────── */
+.method-intro{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
+.method-phase-row{
+  display:grid;grid-template-columns:80px 1fr;
+  padding:44px 56px;border-bottom:1px solid var(--border);
+  align-items:start;gap:32px;
+}
+.method-phase-row:last-child{border-bottom:none}
+.method-phase-num{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--linen);line-height:1}
+.method-phase-content h3{font-size:20px;font-weight:500;margin-bottom:8px}
+.method-phase-content p{font-size:14px;color:var(--brown-mid);line-height:1.7;margin-bottom:16px;font-weight:300}
+.method-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.method-tag{font-size:11px;padding:4px 12px;background:var(--cream-deep);border:1px solid var(--border);color:var(--brown-mid);letter-spacing:.06em}
 
-  /* ── PHASE BULLETS ────────────────────────────────── */
-  .pbullets { list-style:none; margin-top:14px; }
-  .pbullets li { font-size:13px; font-weight:300; color:var(--brown-mid); padding:7px 0; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
-  .pbullets li:last-child { border-bottom:none; }
-  .pdot { width:4px; height:4px; border-radius:50%; background:var(--brown-pale); flex-shrink:0; }
+/* ─── PROGRESS ───────────────────────────────────────────── */
+.prog-wrap{height:2px;background:var(--linen);position:relative}
+.prog-fill{position:absolute;left:0;top:0;height:100%;background:var(--brown);transition:width 1s cubic-bezier(.4,0,.2,1)}
 
-  /* ── HERO DECO ────────────────────────────────────── */
-  .hero-deco { font-family:'Cormorant Garamond',serif; font-weight:300; color:var(--linen); line-height:.9; user-select:none; letter-spacing:-.03em; }
-  .stat-num  { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:400; }
+/* ─── SPINNER ────────────────────────────────────────────── */
+.spinner{width:32px;height:32px;border:1.5px solid var(--sand);border-top-color:var(--brown);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 24px}
 
-  /* ── AUDIENCE GRID ────────────────────────────────── */
-  .audience-row { padding:48px 64px; border-bottom:1px solid var(--border); display:flex; gap:0; }
-  .audience-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brown-pale); min-width:140px; padding-top:4px; }
-  .audience-grid { display:grid; grid-template-columns:1fr 1fr; flex:1; }
-  .audience-item { padding:20px 24px; border-bottom:1px solid var(--border); border-right:1px solid var(--border); }
-  .audience-item:nth-child(2n) { border-right:none; }
-  .audience-item:nth-last-child(-n+2) { border-bottom:none; }
-  .audience-item-title { font-size:14px; font-weight:500; margin-bottom:5px; }
-  .audience-item-sub   { font-size:13px; color:var(--brown-mid); font-weight:300; line-height:1.5; }
+/* ─── OPTION PILLS ───────────────────────────────────────── */
+.option-pill{
+  padding:12px 14px;background:transparent;border:1px solid var(--border);
+  cursor:pointer;font-family:'Outfit',sans-serif;font-size:14px;
+  font-weight:300;color:var(--brown-mid);text-align:left;transition:all .2s;width:100%;
+}
+.option-pill:hover{border-color:var(--brown-mid);color:var(--brown);background:var(--cream-deep)}
+.option-pill.selected{background:var(--brown);color:var(--cream);border-color:var(--brown)}
 
-  /* ── PHOTO STRIP ──────────────────────────────────── */
-  .photo-strip { display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid var(--border); height:360px; }
-  .photo-cell { overflow:hidden; position:relative; }
-  .photo-cell img { width:100%; height:100%; object-fit:cover; filter:sepia(16%) brightness(0.97); transition:transform .6s ease; display:block; }
-  .photo-cell:hover img { transform:scale(1.04); }
-  .photo-caption { position:absolute; bottom:0; left:0; right:0; padding:16px 20px; background:linear-gradient(to top,rgba(44,31,24,.72) 0%,transparent 100%); color:var(--cream); font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
-  .photo-text { background:var(--brown); color:var(--cream); display:flex; flex-direction:column; justify-content:flex-end; padding:40px; }
+/* ─── INPUTS ─────────────────────────────────────────────── */
+textarea,.fi{
+  width:100%;color:var(--brown);border:1px solid var(--border);
+  padding:13px 16px;font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:300;resize:none;
+  transition:border-color .2s;outline:none;
+  -webkit-appearance:none;appearance:none;border-radius:0;
+}
+textarea{background:var(--white);font-size:15px}
+.fi{background:var(--cream-warm)}
+textarea:focus,.fi:focus{border-color:var(--brown);background:var(--white)}
+textarea::placeholder,.fi::placeholder{color:var(--brown-pale)}
+select.fi{
+  cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239E7D6F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;
+}
 
-  /* ── RESULT ───────────────────────────────────────── */
-  .result-grid { display:grid; grid-template-columns:1fr 1fr; min-height:calc(90vh - 60px); }
-  .result-left { background:var(--brown-deep); color:var(--cream); padding:80px 64px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid rgba(255,255,255,.08); }
-  .result-right { padding:80px 64px; display:flex; flex-direction:column; justify-content:center; overflow-y:auto; }
-  .profile-block { margin-bottom:28px; }
-  .profile-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--brown-pale); margin-bottom:6px; }
-  .profile-body  { color:var(--brown); font-size:15px; line-height:1.8; font-weight:300; }
+/* ─── RESULT ─────────────────────────────────────────────── */
+.result-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(90vh - 60px)}
+.result-left{background:var(--brown-deep);color:var(--cream);padding:72px 56px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,.08)}
+.result-right{padding:72px 56px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+.profile-block{margin-bottom:26px}
+.profile-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:6px}
+.profile-body{color:var(--brown);font-size:15px;line-height:1.8;font-weight:300}
 
-  /* ── QUESTION LAYOUT ──────────────────────────────── */
-  .q-grid  { display:grid; grid-template-columns:1fr 1fr; min-height:calc(90vh - 100px); }
-  .q-left  { padding:80px 64px; border-right:1px solid var(--border); display:flex; flex-direction:column; justify-content:center; }
-  .q-right { padding:80px 64px; display:flex; flex-direction:column; justify-content:center; }
-  .opts-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+/* ─── QUESTION LAYOUT ────────────────────────────────────── */
+.q-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(90vh - 100px)}
+.q-left{padding:72px 56px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.q-right{padding:72px 56px;display:flex;flex-direction:column;justify-content:center}
+.opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
-  /* ── MODAL ────────────────────────────────────────── */
-  .modal-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(44,31,24,.55); align-items:center; justify-content:center; padding:24px; animation:fadeIn .25s ease both; }
-  .modal-overlay.open { display:flex; }
-  .modal-box { background:var(--white); width:100%; max-width:640px; max-height:90vh; overflow-y:auto; animation:fadeUp .3s ease both; position:relative; }
-  .modal-header { background:var(--brown-deep); color:var(--cream); padding:36px 48px 28px; }
-  .modal-body   { padding:40px 48px; }
-  .modal-close  { position:absolute; top:16px; right:20px; background:none; border:none; cursor:pointer; color:rgba(248,242,240,.5); font-size:22px; line-height:1; transition:color .2s; padding:4px; }
-  .modal-close:hover { color:var(--cream); }
-  .form-row  { margin-bottom:20px; }
-  .form-two  { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-  .form-label { display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:500; color:var(--brown-light); margin-bottom:8px; }
-  .rgpd-req   { color:var(--clay-light); font-size:11px; }
-  .rgpd-box   { border:1px solid var(--border); padding:18px 20px; background:var(--cream); margin-bottom:20px; }
-  .rgpd-row   { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; }
-  .rgpd-row:last-child { margin-bottom:0; }
-  .rgpd-cb {
-    width:18px; height:18px; min-width:18px; border:1px solid var(--border-mid); background:var(--white);
-    cursor:pointer; appearance:none; -webkit-appearance:none; margin-top:1px; transition:all .2s; outline:none;
-  }
-  .rgpd-cb:checked { background:var(--brown); border-color:var(--brown); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23F8F2F0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:center; }
-  .rgpd-text { font-size:12px; color:var(--brown-mid); line-height:1.55; font-weight:300; }
-  .rgpd-text a { color:var(--brown); text-decoration:underline; }
-  .form-success { display:none; text-align:center; padding:48px 32px; }
-  .form-success.show { display:block; }
-  .form-error { font-size:13px; color:#8B3A3A; background:#FDF5F5; border:1px solid #E8C5C5; padding:12px 16px; margin-bottom:20px; display:none; }
-  .form-error.show { display:block; }
+/* ─── MODAL ──────────────────────────────────────────────── */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(44,31,24,.55);align-items:center;justify-content:center;padding:16px;animation:fadeIn .25s ease both}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--white);width:100%;max-width:640px;max-height:92vh;overflow-y:auto;animation:fadeUp .3s ease both;position:relative}
+.modal-header{background:var(--brown-deep);color:var(--cream);padding:32px 40px 24px}
+.modal-body{padding:32px 40px}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;cursor:pointer;color:rgba(248,242,240,.5);font-size:22px;line-height:1;transition:color .2s;padding:4px}
+.modal-close:hover{color:var(--cream)}
+.form-row{margin-bottom:18px}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--brown-light);margin-bottom:7px}
+.rgpd-req{color:var(--clay-light);font-size:11px}
+.rgpd-box{border:1px solid var(--border);padding:16px 18px;background:var(--cream);margin-bottom:18px}
+.rgpd-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+.rgpd-row:last-child{margin-bottom:0}
+.rgpd-cb{width:18px;height:18px;min-width:18px;border:1px solid var(--border-mid);background:var(--white);cursor:pointer;appearance:none;-webkit-appearance:none;margin-top:1px;transition:all .2s;outline:none}
+.rgpd-cb:checked{background:var(--brown);border-color:var(--brown);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%23F8F2F0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.rgpd-text{font-size:12px;color:var(--brown-mid);line-height:1.55;font-weight:300}
+.rgpd-text a{color:var(--brown);text-decoration:underline}
+.form-success{display:none;text-align:center;padding:44px 28px}
+.form-success.show{display:block}
+.form-error{font-size:13px;color:#8B3A3A;background:#FDF5F5;border:1px solid #E8C5C5;padding:12px 16px;margin-bottom:18px;display:none}
+.form-error.show{display:block}
 
-  /* ── SCROLLBAR ────────────────────────────────────── */
-  ::-webkit-scrollbar { width:3px; }
-  ::-webkit-scrollbar-track { background:var(--cream); }
-  ::-webkit-scrollbar-thumb { background:var(--sand); }
+/* ─── SCROLLBAR ──────────────────────────────────────────── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--sand)}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE — max 768px
+═══════════════════════════════════════════════════════════ */
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:0 20px}
+  .nav-brand-name{font-size:22px}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+
+  /* Pages */
+  .page{padding-top:60px}
+
+  /* Two-col → single */
+  .two-col{grid-template-columns:1fr}
+  .col-left{border-right:none;border-bottom:1px solid var(--border)}
+  .col-pad{padding:48px 24px}
+
+  /* Hero photo: fixed height on mobile */
+  .hero-photo-wrap{height:280px;border-left:none;border-top:1px solid var(--border)}
+  .hero-photo-wrap img{height:280px}
+
+  /* Photo strip: vertical on mobile */
+  .photo-strip{grid-template-columns:1fr;height:auto}
+  .photo-cell{height:220px}
+  .photo-text{min-height:200px;padding:28px 24px}
+
+  /* Audience */
+  .audience-row{flex-direction:column;padding:32px 24px;gap:20px}
+  .audience-label{min-width:unset}
+  .audience-grid{grid-template-columns:1fr}
+  .audience-item:nth-child(2n){border-right:none}
+  .audience-item:nth-last-child(-n+2){border-bottom:1px solid var(--border)}
+  .audience-item:last-child{border-bottom:none}
+  .audience-item{padding:14px 0}
+
+  /* Map grid → stack */
+  .map-grid{grid-template-columns:1fr}
+  .phase-card{border-right:none;border-bottom:1px solid var(--border)}
+  .phase-card:last-child{border-bottom:none}
+
+  /* Method page */
+  .method-intro{grid-template-columns:1fr}
+  .method-phase-row{padding:32px 24px;grid-template-columns:60px 1fr;gap:20px}
+  .method-phase-num{font-size:48px}
+
+  /* Map page header */
+  #page-map > div:first-child{padding:40px 24px 28px}
+  #page-map > div:first-child h2{font-size:36px}
+
+  /* Map photo band */
+  .map-photo-band{grid-template-columns:1fr !important;height:auto !important}
+  .map-photo-band > div:first-child{height:220px}
+  .map-photo-band > div:last-child{padding:36px 24px !important}
+
+  /* Question layout → stack */
+  .q-grid{grid-template-columns:1fr;min-height:unset}
+  .q-left{padding:40px 24px 24px;border-right:none;border-bottom:1px solid var(--border)}
+  .q-right{padding:24px 24px 40px}
+  .opts-grid{grid-template-columns:1fr}
+
+  /* Result → stack */
+  .result-grid{grid-template-columns:1fr;min-height:unset}
+  .result-left{padding:48px 24px;border-right:none}
+  .result-right{padding:40px 24px}
+
+  /* Phase1 intro */
+  #page-phase1 .two-col .col-right{display:none}
+
+  /* Phase overview section */
+  #phase-overview-grid{grid-template-columns:1fr !important}
+  #phase-stats{border-top:1px solid var(--border);align-items:flex-start !important;flex-direction:row !important;flex-wrap:wrap;gap:24px !important;padding-top:32px}
+
+  /* Mentor strip */
+  .mentor-strip{padding:28px 24px;flex-direction:column;align-items:flex-start}
+  .mentor-strip .mt{font-size:20px}
+
+  /* Modal */
+  .modal-body{padding:24px 20px}
+  .modal-header{padding:24px 20px}
+  .form-two{grid-template-columns:1fr}
+
+  /* Test progress bar row */
+  #test-progbar-row{padding:14px 24px !important}
+
+  /* Buttons */
+  .btn{padding:13px 22px;font-size:12px}
+
+  /* Stats */
+  .stat-num{font-size:24px}
+}
+
+@media(max-width:480px){
+  nav{height:56px}
+  .page{padding-top:56px}
+  .nav-mobile{top:56px}
+  .col-pad{padding:36px 20px}
+  .mentor-strip{padding:24px 20px}
+}
 </style>
 </head>
 <body>
@@ -256,19 +388,17 @@
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-header">
       <button class="modal-close" onclick="closeMentorModal()" aria-label="Cerrar">&times;</button>
-      <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:12px;">Mentoría Personalizada</div>
-      <h2 id="modal-title" class="serif" style="font-size:32px;font-weight:300;font-style:italic;line-height:1.2;margin-bottom:8px;">Reserva tu sesión 1 a 1.</h2>
+      <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.5;margin-bottom:10px;">Mentoría Personalizada</div>
+      <h2 id="modal-title" class="serif" style="font-size:28px;font-weight:300;font-style:italic;line-height:1.2;margin-bottom:6px;">Reserva tu sesión 1 a 1.</h2>
       <p style="font-size:13px;opacity:.6;font-weight:300;">Un mentor certificado Sendya se pondrá en contacto contigo en menos de 24h.</p>
     </div>
     <div class="modal-body">
-      <!-- Success -->
       <div class="form-success" id="form-success">
-        <div style="font-size:40px;margin-bottom:20px;">✦</div>
-        <h3 class="serif" style="font-size:28px;font-weight:300;font-style:italic;margin-bottom:12px;">¡Solicitud recibida!</h3>
-        <p style="font-size:14px;color:var(--brown-mid);font-weight:300;line-height:1.6;max-width:340px;margin:0 auto 28px;">Tu mentor Sendya revisará tu perfil y te escribirá en menos de 24 horas para acordar la sesión.</p>
+        <div style="font-size:36px;margin-bottom:16px;">✦</div>
+        <h3 class="serif" style="font-size:26px;font-weight:300;font-style:italic;margin-bottom:10px;">¡Solicitud recibida!</h3>
+        <p style="font-size:14px;color:var(--brown-mid);font-weight:300;line-height:1.6;max-width:320px;margin:0 auto 24px;">Tu mentor Sendya revisará tu perfil y te escribirá en menos de 24 horas para acordar la sesión.</p>
         <button class="btn btn-dark" onclick="closeMentorModal()" style="font-size:12px;">Cerrar</button>
       </div>
-      <!-- Form -->
       <div id="form-wrap">
         <div class="form-error" id="form-error">Por favor revisa los campos obligatorios e inténtalo de nuevo.</div>
         <div class="form-two">
@@ -301,17 +431,17 @@
         </div>
         <div class="form-row"><label class="form-label" for="m-msg">¿Qué esperas de la mentoría?</label><textarea id="m-msg" rows="3" placeholder="Cuéntanos brevemente en qué punto estás y qué buscas conseguir..." style="font-size:14px;"></textarea></div>
         <div class="rgpd-box">
-          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brown-light);margin-bottom:14px;font-weight:500;">Protección de datos · RGPD</div>
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--brown-light);margin-bottom:12px;font-weight:500;">Protección de datos · RGPD</div>
           <div class="rgpd-row">
             <input class="rgpd-cb" type="checkbox" id="rgpd-base"/>
-            <label class="rgpd-text" for="rgpd-base"><strong style="font-weight:500;">Acepto el tratamiento de mis datos personales</strong> <span class="rgpd-req">*</span><br>He leído y acepto la <a href="#" onclick="return false;">Política de Privacidad</a>. Sendya tratará tus datos para gestionar la solicitud de mentoría en base a tu consentimiento expreso (art. 6.1.a RGPD). Derechos de acceso, rectificación, supresión y portabilidad en <a href="mailto:privacidad@sendya.com">privacidad@sendya.com</a>.</label>
+            <label class="rgpd-text" for="rgpd-base"><strong style="font-weight:500;">Acepto el tratamiento de mis datos personales</strong> <span class="rgpd-req">*</span><br>He leído y acepto la <a href="#" onclick="return false;">Política de Privacidad</a>. Sendya tratará tus datos para gestionar la solicitud de mentoría en base a tu consentimiento (art. 6.1.a RGPD). Derechos: <a href="mailto:privacidad@sendya.com">privacidad@sendya.com</a>.</label>
           </div>
           <div class="rgpd-row">
             <input class="rgpd-cb" type="checkbox" id="rgpd-com"/>
             <label class="rgpd-text" for="rgpd-com"><strong style="font-weight:500;">Comunicaciones comerciales</strong> (opcional)<br>Acepto recibir información sobre programas y novedades de Sendya.</label>
           </div>
         </div>
-        <p style="font-size:11px;color:var(--brown-pale);margin-bottom:24px;line-height:1.6;">Los campos <span class="rgpd-req">*</span> son obligatorios. Responsable: Sendya · Finalidad: gestión de mentorías · Legitimación: consentimiento · Derechos: <a href="mailto:privacidad@sendya.com" style="color:var(--brown-light);">privacidad@sendya.com</a></p>
+        <p style="font-size:11px;color:var(--brown-pale);margin-bottom:20px;line-height:1.6;">Los campos <span class="rgpd-req">*</span> son obligatorios. Responsable: Sendya · Finalidad: gestión de mentorías · Legitimación: consentimiento</p>
         <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
           <button class="btn btn-dark" id="btn-submit" onclick="submitForm()" style="font-size:12px;">Enviar solicitud →</button>
           <button class="btn btn-ghost" onclick="closeMentorModal()" style="font-size:12px;">Cancelar</button>
@@ -324,74 +454,95 @@
 
 <!-- ═══ NAV ═══════════════════════════════════════════════════════════════ -->
 <nav>
-  <button class="nav-logo" onclick="showPage('home')">Sendya</button>
+  <button class="nav-brand" onclick="showPage('home')">
+    <span class="nav-brand-name">Sendya</span>
+    <span class="nav-brand-sub">Encuentra tu propósito laboral</span>
+  </button>
+  <!-- Desktop links -->
   <div class="nav-links">
-    <button class="nav-link active" id="nav-home" onclick="showPage('home')">Inicio</button>
-    <button class="nav-link"        id="nav-map"  onclick="showPage('map')">Mi Mapa</button>
+    <button class="nav-link active" id="nav-home"   onclick="showPage('home')">Inicio</button>
+    <button class="nav-link"        id="nav-metodo" onclick="showPage('metodo')">Método</button>
+    <button class="nav-link"        id="nav-map"    onclick="showPage('map')">Mi Mapa</button>
   </div>
+  <!-- Hamburger (mobile) -->
+  <button class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<!-- Mobile menu -->
+<div class="nav-mobile" id="nav-mobile">
+  <button class="nav-link" onclick="showPage('home');toggleMenu()">Inicio</button>
+  <button class="nav-link" onclick="showPage('metodo');toggleMenu()">Método</button>
+  <button class="nav-link" onclick="showPage('map');toggleMenu()">Mi Mapa</button>
+</div>
 
 <!-- ═══ HOME ══════════════════════════════════════════════════════════════ -->
 <section class="page visible" id="page-home">
 
-  <!-- Hero: text + photo -->
-  <div class="two-col" style="min-height:88vh;">
+  <!-- Hero -->
+  <div class="two-col" style="min-height:86vh;">
     <div class="col-pad col-left">
       <span class="tag a1">Método Sendya</span>
-      <h1 class="serif a2" style="font-size:clamp(50px,7vw,82px);font-weight:300;line-height:1.02;letter-spacing:-.02em;margin:28px 0 24px;">
+      <h1 class="serif a2" style="font-size:clamp(44px,6.5vw,76px);font-weight:300;line-height:1.03;letter-spacing:-.02em;margin:24px 0 20px;">
         Encuentra<br><em>tu propósito</em><br>laboral.
       </h1>
       <div class="divider a3"></div>
-      <p class="a3" style="font-size:16px;font-weight:300;line-height:1.75;color:var(--brown-mid);max-width:380px;margin-bottom:40px;">
+      <p class="a3" style="font-size:15px;font-weight:300;line-height:1.75;color:var(--brown-mid);max-width:360px;margin-bottom:36px;">
         Una plataforma de acompañamiento vocacional para estudiantes de bachillerato y FP, universitarios y personas en transición laboral.
       </p>
       <div class="a4" style="display:flex;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-dark" onclick="showPage('phase1')">Comenzar</button>
-        <button class="btn btn-ghost" onclick="showPage('map')">Ver el método</button>
+        <button class="btn btn-ghost" onclick="showPage('metodo')">Ver el método</button>
       </div>
     </div>
-    <!-- Photo right -->
-    <div style="position:relative;overflow:hidden;border-left:1px solid var(--border);">
+    <!-- Hero photo: warm, aspirational -->
+    <div class="hero-photo-wrap">
       <img
-        src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=900&q=80&fit=crop&crop=faces"
-        alt="Persona reflexionando sobre su propósito profesional"
-        style="width:100%;height:100%;object-fit:cover;filter:sepia(12%) brightness(.97);display:block;animation:fadeIn 1s .3s both;"
+        src="https://images.unsplash.com/photo-1434030216411-0b793f4b6f75?w=900&q=80&fit=crop&crop=top"
+        alt="Persona escribiendo con propósito"
       />
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:32px 40px;background:linear-gradient(to top,rgba(44,31,24,.70) 0%,transparent 100%);">
-        <p class="serif" style="color:var(--cream);font-size:20px;font-style:italic;font-weight:300;line-height:1.4;">
+      <div class="hero-photo-caption">
+        <p class="serif" style="color:var(--cream);font-size:18px;font-style:italic;font-weight:300;line-height:1.4;">
           "El propósito no se elige,<br>se descubre."
         </p>
       </div>
     </div>
   </div>
 
-  <!-- Photo strip -->
+  <!-- Photo strip: 3 columns -->
   <div class="photo-strip">
+    <!-- Photo 1: group / people -->
     <div class="photo-cell">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=75&fit=crop" alt="Estudiantes colaborando"/>
-      <div class="photo-caption">Autoconocimiento</div>
+      <img
+        src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=75&fit=crop&crop=center"
+        alt="Equipo trabajando junto"
+      />
     </div>
+    <!-- Central text panel -->
     <div class="photo-text">
-      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.45;margin-bottom:16px;">El método en 3 fases</div>
-      <p class="serif" style="font-size:clamp(22px,3vw,30px);font-weight:300;font-style:italic;line-height:1.35;margin-bottom:24px;">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.4;margin-bottom:14px;">El método en 3 fases</div>
+      <p class="serif" style="font-size:clamp(20px,2.5vw,26px);font-weight:300;font-style:italic;line-height:1.4;margin-bottom:20px;">
         De saber quién eres<br>a saber exactamente<br>hacia dónde ir.
       </p>
-      <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="font-size:13px;color:rgba(248,242,240,.65);">① Autoconocimiento</div>
         <div style="font-size:13px;color:rgba(248,242,240,.65);">② Exploración</div>
         <div style="font-size:13px;color:rgba(248,242,240,.65);">③ Plan de Acción</div>
       </div>
     </div>
+    <!-- Photo 3: young professional -->
     <div class="photo-cell">
-      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=75&fit=crop&crop=faces" alt="Profesional con propósito"/>
-      <div class="photo-caption">Plan de Acción</div>
+      <img
+        src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=75&fit=crop&crop=top"
+        alt="Profesional con propósito"
+      />
     </div>
   </div>
 
   <!-- Phase overview + stats -->
-  <div class="two-col" style="min-height:auto;">
-    <div class="col-pad col-left" style="padding:60px 64px;">
-      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:24px;">Las tres fases</div>
+  <div id="phase-overview-grid" class="two-col" style="border-bottom:1px solid var(--border);">
+    <div class="col-pad col-left" style="padding:56px;">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:22px;">Las tres fases</div>
       <div class="phase-row">
         <span class="phase-num">01</span>
         <div style="flex:1;">
@@ -414,8 +565,8 @@
         </div>
       </div>
     </div>
-    <div class="col-pad col-right" style="padding:60px 64px;justify-content:flex-end;align-items:flex-end;">
-      <div style="display:flex;flex-direction:column;gap:28px;align-items:flex-end;text-align:right;">
+    <div id="phase-stats" class="col-pad col-right" style="padding:56px;justify-content:flex-end;align-items:flex-end;">
+      <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-end;text-align:right;">
         <div><div class="stat-num serif">2.4K+</div><div style="font-size:12px;color:var(--brown-light);">personas acompañadas</div></div>
         <div><div class="stat-num serif">94%</div><div style="font-size:12px;color:var(--brown-light);">tasa de claridad vocacional</div></div>
         <div><div class="stat-num serif">48h</div><div style="font-size:12px;color:var(--brown-light);">para tener tu perfil completo</div></div>
@@ -457,19 +608,122 @@
 
 </section>
 
-<!-- ═══ MAP / MÉTODO ═══════════════════════════════════════════════════════ -->
+<!-- ═══ MÉTODO ════════════════════════════════════════════════════════════ -->
+<section class="page" id="page-metodo">
+
+  <!-- Header -->
+  <div class="method-intro">
+    <div class="col-pad col-left">
+      <span class="tag" style="margin-bottom:20px;display:inline-block;">El Método Sendya</span>
+      <h2 class="serif" style="font-size:clamp(36px,5vw,56px);font-weight:300;line-height:1.05;letter-spacing:-.02em;margin-bottom:20px;">
+        Un proceso,<br><em>no un test.</em>
+      </h2>
+      <div style="width:40px;height:1px;background:var(--sand);margin-bottom:20px;"></div>
+      <p style="font-size:15px;font-weight:300;color:var(--brown-mid);line-height:1.75;max-width:340px;">
+        Sendya no te etiqueta ni te da un perfil genérico. Te acompaña en un proceso estructurado de tres fases para que llegues a tu propio propósito laboral con claridad y un plan real.
+      </p>
+    </div>
+    <div class="col-pad col-right" style="background:var(--cream-warm);">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:24px;">¿Por qué Sendya?</div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:20px;min-width:28px;">🧠</span>
+          <div><div style="font-weight:500;font-size:14px;margin-bottom:3px;">Autoconocimiento real</div><div style="font-size:13px;color:var(--brown-mid);line-height:1.5;">No tests de personalidad genéricos, sino preguntas que revelan lo que realmente te mueve.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:20px;min-width:28px;">📡</span>
+          <div><div style="font-weight:500;font-size:14px;margin-bottom:3px;">Conectado al mercado</div><div style="font-size:13px;color:var(--brown-mid);line-height:1.5;">Tus resultados se cruzan con datos reales del mercado laboral actual.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:20px;min-width:28px;">🗺️</span>
+          <div><div style="font-weight:500;font-size:14px;margin-bottom:3px;">Un plan, no solo ideas</div><div style="font-size:13px;color:var(--brown-mid);line-height:1.5;">Terminas con una hoja de ruta con pasos concretos, no con más dudas.</div></div>
+        </div>
+        <div style="display:flex;gap:16px;align-items:flex-start;">
+          <span style="font-size:20px;min-width:28px;">🤝</span>
+          <div><div style="font-weight:500;font-size:14px;margin-bottom:3px;">Acompañamiento humano</div><div style="font-size:13px;color:var(--brown-mid);line-height:1.5;">Mentores reales disponibles en cada etapa para profundizar contigo.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 01 -->
+  <div class="method-phase-row">
+    <div class="method-phase-num">01</div>
+    <div class="method-phase-content">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 01</div>
+      <h3>Autoconocimiento</h3>
+      <p>El punto de partida de cualquier decisión profesional sólida. Esta fase te ayuda a mapear con honestidad cuatro dimensiones esenciales: qué eres capaz de hacer bien (fortalezas), qué te genera energía o te absorbe (pasiones), qué situaciones te vacían o frustran (frustraciones), y qué principios no negociarías en tu vida laboral (valores). El resultado es tu <strong>Código de Identidad Sendya</strong>, una síntesis única de quién eres profesionalmente.</p>
+      <div class="method-tags">
+        <span class="method-tag">Fortalezas</span>
+        <span class="method-tag">Frustraciones</span>
+        <span class="method-tag">Pasiones</span>
+        <span class="method-tag">Valores</span>
+        <span class="method-tag">Código de Identidad</span>
+      </div>
+      <div style="margin-top:20px;">
+        <button class="btn btn-dark" style="font-size:12px;" onclick="showPage('phase1')">Comenzar Fase 1 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 02 -->
+  <div class="method-phase-row" style="background:var(--cream-warm);">
+    <div class="method-phase-num">02</div>
+    <div class="method-phase-content">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 02</div>
+      <h3>Exploración</h3>
+      <p>Con tu Código de Identidad en mano, esta fase te conecta con el mundo profesional real. Exploras opciones y salidas que se alinean con tu perfil, analizas oportunidades del mercado actual, y usas un simulador de inteligencia artificial para vivir virtualmente cómo sería tu día a día en diferentes profesiones. El objetivo es pasar de las ideas vagas a opciones concretas y fundamentadas.</p>
+      <div class="method-tags">
+        <span class="method-tag">Opciones profesionales</span>
+        <span class="method-tag">Salidas de mercado</span>
+        <span class="method-tag">Simulador IA</span>
+        <span class="method-tag">Sectores emergentes</span>
+        <span class="method-tag">Radar de oportunidades</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase 03 -->
+  <div class="method-phase-row">
+    <div class="method-phase-num">03</div>
+    <div class="method-phase-content">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 03</div>
+      <h3>Plan de Acción</h3>
+      <p>La claridad sin acción no cambia nada. En esta fase diseñas tu hoja de ruta personalizada: objetivos con hitos y fechas, estrategias para gestionar los miedos y obstáculos reales que aparezcan, y compromisos concretos de seguimiento. Terminas con un informe final de propósito profesional listo para ser ejecutado.</p>
+      <div class="method-tags">
+        <span class="method-tag">Hoja de ruta</span>
+        <span class="method-tag">Objetivos e hitos</span>
+        <span class="method-tag">Gestión de miedos</span>
+        <span class="method-tag">Compromisos</span>
+        <span class="method-tag">Informe final</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mentor-strip">
+    <div>
+      <div class="ml">Mentoría Personalizada</div>
+      <div class="mt">¿Quieres que un experto te acompañe en el proceso?</div>
+      <div class="ms">Sesiones 1 a 1 disponibles en cualquier fase del método.</div>
+    </div>
+    <button class="btn btn-light" onclick="openModal()">Reservar Mentoría →</button>
+  </div>
+
+</section>
+
+<!-- ═══ MI MAPA ════════════════════════════════════════════════════════════ -->
 <section class="page" id="page-map">
 
-  <div style="padding:64px 64px 40px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;">
+  <div style="padding:56px 56px 36px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
     <div>
-      <span class="tag" style="margin-bottom:16px;display:inline-block;">Método Sendya</span>
-      <h2 class="serif" style="font-size:52px;font-weight:300;line-height:1.05;letter-spacing:-.02em;">
-        Las tres fases<br><em>del proceso.</em>
+      <span class="tag" style="margin-bottom:14px;display:inline-block;">Método Sendya</span>
+      <h2 class="serif" style="font-size:clamp(32px,5vw,50px);font-weight:300;line-height:1.05;letter-spacing:-.02em;">
+        Tu progreso<br><em>en el método.</em>
       </h2>
     </div>
     <div id="map-code-box" style="display:none;text-align:right;">
-      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-light);margin-bottom:6px;">Tu código Sendya</div>
-      <div class="serif" id="map-code-display" style="font-size:32px;font-weight:400;letter-spacing:.05em;"></div>
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-light);margin-bottom:5px;">Tu código Sendya</div>
+      <div class="serif" id="map-code-display" style="font-size:30px;font-weight:400;letter-spacing:.05em;"></div>
     </div>
   </div>
 
@@ -479,79 +733,78 @@
     <!-- F01 -->
     <div class="phase-card" id="map-p1" onclick="showPage('phase1')" style="cursor:pointer;">
       <div>
-        <div class="serif" style="font-size:72px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:20px;">01</div>
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 01</div>
-        <div style="font-size:22px;font-weight:500;margin-bottom:12px;">Autoconocimiento</div>
-        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.65;margin-bottom:0;">
-          El punto de partida. Antes de explorar el mundo profesional, necesitas entender qué te mueve, qué te frena y qué te define como persona.
-        </p>
+        <div class="serif" style="font-size:64px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:16px;">01</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:7px;">Fase 01</div>
+        <div style="font-size:20px;font-weight:500;margin-bottom:10px;">Autoconocimiento</div>
+        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.6;">El punto de partida. Entiende qué te mueve, qué te frena y qué te define.</p>
         <ul class="pbullets">
-          <li><span class="pdot"></span>Mapeo de fortalezas y talentos naturales</li>
-          <li><span class="pdot"></span>Identificación de frustraciones y bloqueos</li>
-          <li><span class="pdot"></span>Exploración de pasiones y motivaciones</li>
-          <li><span class="pdot"></span>Definición de valores profesionales irrenunciables</li>
-          <li><span class="pdot"></span>Generación de tu Código de Identidad Sendya</li>
+          <li><span class="pdot"></span>Mapeo de fortalezas y talentos</li>
+          <li><span class="pdot"></span>Frustraciones y bloqueos</li>
+          <li><span class="pdot"></span>Pasiones y motivaciones</li>
+          <li><span class="pdot"></span>Valores profesionales</li>
+          <li><span class="pdot"></span>Código de Identidad Sendya</li>
         </ul>
       </div>
-      <div style="margin-top:28px;">
+      <div style="margin-top:24px;">
         <button class="btn btn-dark" style="font-size:12px;" onclick="event.stopPropagation();showPage('phase1')">Comenzar →</button>
       </div>
     </div>
     <!-- F02 -->
     <div class="phase-card locked" id="map-p2">
-      <div class="phase-badge lock-badge">🔒 Próximamente</div>
+      <div class="phase-badge lock-badge">Próximamente</div>
       <div>
-        <div class="serif" style="font-size:72px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:20px;">02</div>
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 02</div>
-        <div style="font-size:22px;font-weight:500;margin-bottom:12px;">Exploración</div>
-        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.65;margin-bottom:0;">
-          Con tu perfil en mano, exploramos el panorama profesional que encaja contigo. Descubrimiento guiado y conectado al mercado real.
-        </p>
+        <div class="serif" style="font-size:64px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:16px;">02</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:7px;">Fase 02</div>
+        <div style="font-size:20px;font-weight:500;margin-bottom:10px;">Exploración</div>
+        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.6;">Conecta tu perfil con el mundo profesional real y explora salidas concretas.</p>
         <ul class="pbullets">
-          <li><span class="pdot"></span>Opciones y salidas profesionales personalizadas</li>
-          <li><span class="pdot"></span>Mapa de oportunidades del mercado actual</li>
-          <li><span class="pdot"></span>Simulador de profesiones con inteligencia artificial</li>
-          <li><span class="pdot"></span>Análisis de sectores emergentes y tendencias</li>
-          <li><span class="pdot"></span>Contraste de expectativas vs. realidad del mercado</li>
+          <li><span class="pdot"></span>Opciones y salidas profesionales</li>
+          <li><span class="pdot"></span>Radar de oportunidades</li>
+          <li><span class="pdot"></span>Simulador de profesiones con IA</li>
+          <li><span class="pdot"></span>Sectores emergentes</li>
+          <li><span class="pdot"></span>Expectativas vs. mercado real</li>
         </ul>
       </div>
-      <div style="margin-top:28px;">
+      <div style="margin-top:24px;">
         <button class="btn btn-ghost" style="font-size:12px;">Desbloquear esta fase</button>
       </div>
     </div>
     <!-- F03 -->
     <div class="phase-card locked" id="map-p3">
-      <div class="phase-badge lock-badge">🔒 Próximamente</div>
+      <div class="phase-badge lock-badge">Próximamente</div>
       <div>
-        <div class="serif" style="font-size:72px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:20px;">03</div>
-        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:8px;">Fase 03</div>
-        <div style="font-size:22px;font-weight:500;margin-bottom:12px;">Plan de Acción</div>
-        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.65;margin-bottom:0;">
-          De la claridad a los pasos concretos. Diseñamos tu hoja de ruta, gestionamos los miedos y establecemos compromisos reales.
-        </p>
+        <div class="serif" style="font-size:64px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:16px;">03</div>
+        <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:7px;">Fase 03</div>
+        <div style="font-size:20px;font-weight:500;margin-bottom:10px;">Plan de Acción</div>
+        <p style="font-size:13px;color:var(--brown-mid);font-weight:300;line-height:1.6;">De la claridad a los pasos concretos. Tu hoja de ruta personalizada.</p>
         <ul class="pbullets">
-          <li><span class="pdot"></span>Diseño de tu hoja de ruta personalizada</li>
-          <li><span class="pdot"></span>Objetivos con hitos medibles y fechas concretas</li>
-          <li><span class="pdot"></span>Gestión de miedos y obstáculos reales</li>
-          <li><span class="pdot"></span>Sistema de compromisos y seguimiento continuo</li>
-          <li><span class="pdot"></span>Informe final de propósito profesional</li>
+          <li><span class="pdot"></span>Hoja de ruta personalizada</li>
+          <li><span class="pdot"></span>Objetivos con hitos y fechas</li>
+          <li><span class="pdot"></span>Gestión de miedos y obstáculos</li>
+          <li><span class="pdot"></span>Sistema de compromisos</li>
+          <li><span class="pdot"></span>Informe final de propósito</li>
         </ul>
       </div>
-      <div style="margin-top:28px;">
+      <div style="margin-top:24px;">
         <button class="btn btn-ghost" style="font-size:12px;">Desbloquear esta fase</button>
       </div>
     </div>
   </div>
 
-  <!-- Photo quote band -->
-  <div style="display:grid;grid-template-columns:1fr 2fr;border-bottom:1px solid var(--border);height:260px;">
-    <div style="overflow:hidden;">
-      <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=75&fit=crop&crop=faces" alt="Sesión de mentoría" style="width:100%;height:100%;object-fit:cover;filter:sepia(15%) brightness(.96);display:block;"/>
+  <!-- Landscape photo band -->
+  <div class="map-photo-band" style="display:grid;grid-template-columns:2fr 1fr;border-bottom:1px solid var(--border);height:280px;">
+    <div style="overflow:hidden;position:relative;">
+      <img
+        src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80&fit=crop&crop=center"
+        alt="Camino de montaña"
+        style="width:100%;height:100%;object-fit:cover;filter:sepia(18%) brightness(.95);display:block;"
+      />
+      <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(244,235,229,.8));pointer-events:none;"></div>
     </div>
-    <div style="padding:52px 64px;background:var(--cream-warm);display:flex;flex-direction:column;justify-content:center;">
-      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:20px;">Por qué Sendya</div>
-      <p class="serif" style="font-size:clamp(20px,2.6vw,28px);font-weight:300;line-height:1.5;color:var(--brown);max-width:540px;">
-        No es un test de personalidad. Es un proceso estructurado que combina reflexión profunda, datos del mercado laboral y acompañamiento real.
+    <div style="background:var(--cream-warm);padding:44px 40px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brown-pale);margin-bottom:16px;">El camino</div>
+      <p class="serif" style="font-size:clamp(18px,2.2vw,24px);font-weight:300;line-height:1.5;color:var(--brown);">
+        Cada fase completada<br>abre la siguiente.<br><em>Tu ritmo, tu proceso.</em>
       </p>
     </div>
   </div>
@@ -569,35 +822,35 @@
 
 <!-- ═══ PHASE 1 — INTRO ════════════════════════════════════════════════════ -->
 <section class="page" id="page-phase1">
-  <div class="two-col" style="min-height:90vh;">
+  <div class="two-col" style="min-height:88vh;">
     <div class="col-pad col-left">
-      <span class="tag" style="margin-bottom:24px;display:inline-block;">Fase 01 · Autoconocimiento</span>
-      <h2 class="serif" style="font-size:clamp(44px,6vw,68px);font-weight:300;line-height:1;letter-spacing:-.02em;margin-bottom:24px;">
+      <span class="tag" style="margin-bottom:22px;display:inline-block;">Fase 01 · Autoconocimiento</span>
+      <h2 class="serif" style="font-size:clamp(40px,5.5vw,64px);font-weight:300;line-height:1;letter-spacing:-.02em;margin-bottom:22px;">
         El viaje<br><em>empieza adentro.</em>
       </h2>
       <div class="divider"></div>
-      <p style="font-size:15px;font-weight:300;color:var(--brown-mid);line-height:1.7;max-width:360px;margin-bottom:40px;">
+      <p style="font-size:15px;font-weight:300;color:var(--brown-mid);line-height:1.7;max-width:340px;margin-bottom:36px;">
         Antes de explorar el mercado laboral, necesitamos entender quién eres. 5 preguntas. 10 minutos. El cimiento de todo tu plan de propósito.
       </p>
       <button class="btn btn-dark" onclick="startTest()">Comenzar el test →</button>
     </div>
-    <div class="col-pad col-right" style="justify-content:space-between;padding:80px 64px;">
-      <div class="hero-deco" style="font-size:clamp(72px,10vw,120px);">AUTO<br>CONO-<br>CIMTO</div>
+    <div class="col-pad col-right" style="justify-content:space-between;">
+      <div class="serif" style="font-size:clamp(60px,9vw,110px);font-weight:300;color:var(--linen);line-height:.92;user-select:none;letter-spacing:-.03em;">AUTO<br>CONO-<br>CIMTO</div>
       <div>
         <div class="phase-row" style="border-top:1px solid var(--border);">
-          <span style="font-size:15px;min-width:24px;">⚡</span>
+          <span style="font-size:14px;min-width:22px;">⚡</span>
           <div><div style="font-size:14px;font-weight:500;">Fortalezas</div><div style="font-size:12px;color:var(--brown-light);">¿Qué habilidades te definen?</div></div>
         </div>
         <div class="phase-row">
-          <span style="font-size:15px;min-width:24px;">🌊</span>
+          <span style="font-size:14px;min-width:22px;">🌊</span>
           <div><div style="font-size:14px;font-weight:500;">Frustraciones</div><div style="font-size:12px;color:var(--brown-light);">¿Qué te genera vacío o malestar?</div></div>
         </div>
         <div class="phase-row">
-          <span style="font-size:15px;min-width:24px;">🔥</span>
+          <span style="font-size:14px;min-width:22px;">🔥</span>
           <div><div style="font-size:14px;font-weight:500;">Pasiones</div><div style="font-size:12px;color:var(--brown-light);">¿Qué te absorbe por completo?</div></div>
         </div>
         <div class="phase-row" style="border-bottom:none;">
-          <span style="font-size:15px;min-width:24px;">🧭</span>
+          <span style="font-size:14px;min-width:22px;">🧭</span>
           <div><div style="font-size:14px;font-weight:500;">Valores</div><div style="font-size:12px;color:var(--brown-light);">¿Qué no negociarías jamás?</div></div>
         </div>
       </div>
@@ -607,19 +860,19 @@
 
 <!-- ═══ TEST ═══════════════════════════════════════════════════════════════ -->
 <section class="page" id="page-test">
-  <div style="border-bottom:1px solid var(--border);padding:16px 64px;display:flex;align-items:center;gap:24px;">
+  <div id="test-progbar-row" style="border-bottom:1px solid var(--border);padding:14px 56px;display:flex;align-items:center;gap:20px;">
     <div style="flex:1;" class="prog-wrap"><div class="prog-fill" id="test-progress" style="width:0%;"></div></div>
     <div style="font-size:12px;color:var(--brown-light);white-space:nowrap;" id="test-counter">1 / 5</div>
-    <div class="tag" id="test-category" style="min-width:110px;text-align:center;"></div>
+    <div class="tag" id="test-category" style="min-width:100px;text-align:center;"></div>
   </div>
   <div class="q-grid" id="q-layout">
     <div class="q-left">
-      <div class="serif" id="q-num" style="font-size:80px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:32px;user-select:none;">01</div>
-      <h3 class="serif" id="q-text" style="font-size:clamp(26px,4vw,40px);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:16px;white-space:pre-line;"></h3>
+      <div class="serif" id="q-num" style="font-size:72px;font-weight:300;color:var(--linen);line-height:1;margin-bottom:28px;user-select:none;"></div>
+      <h3 class="serif" id="q-text" style="font-size:clamp(24px,3.5vw,38px);font-weight:300;line-height:1.15;letter-spacing:-.01em;margin-bottom:14px;white-space:pre-line;"></h3>
       <p id="q-hint" style="font-size:13px;color:var(--brown-light);line-height:1.6;"></p>
     </div>
     <div class="q-right">
-      <div id="q-input-area" style="margin-bottom:32px;"></div>
+      <div id="q-input-area" style="margin-bottom:28px;"></div>
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <button class="btn btn-ghost" id="btn-prev" onclick="prevQ()" style="font-size:12px;display:none;">← Anterior</button>
         <div></div>
@@ -631,9 +884,9 @@
 
 <!-- ═══ LOADING ════════════════════════════════════════════════════════════ -->
 <section class="page" id="page-loading">
-  <div style="min-height:90vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;">
+  <div style="min-height:88vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;">
     <div class="spinner"></div>
-    <div class="serif" style="font-size:26px;font-weight:300;font-style:italic;color:var(--brown-mid);margin-bottom:8px;">Analizando tu perfil…</div>
+    <div class="serif" style="font-size:24px;font-weight:300;font-style:italic;color:var(--brown-mid);margin-bottom:8px;">Analizando tu perfil…</div>
     <p style="font-size:13px;color:var(--brown-light);">El Método Sendya está procesando tus respuestas</p>
   </div>
 </section>
@@ -642,19 +895,19 @@
 <section class="page" id="page-result">
   <div class="result-grid">
     <div class="result-left">
-      <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.45;margin-bottom:20px;">Tu Código de Identidad Sendya</div>
-      <div class="serif" id="result-code" style="font-size:clamp(48px,8vw,76px);font-weight:300;letter-spacing:.06em;line-height:1;margin-bottom:24px;">—</div>
-      <div style="width:40px;height:1px;background:rgba(248,242,240,.2);margin-bottom:24px;"></div>
-      <p style="font-size:14px;opacity:.58;line-height:1.75;font-weight:300;max-width:300px;">Este código es único. Representa la combinación de fortalezas, valores y visión que solo tú tienes.</p>
-      <div style="margin-top:40px;display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn btn-light" onclick="completePhase1()">Ver el método →</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(248,242,240,.22);color:var(--cream);">Descargar perfil</button>
+      <div style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.45;margin-bottom:18px;">Tu Código de Identidad Sendya</div>
+      <div class="serif" id="result-code" style="font-size:clamp(44px,7vw,72px);font-weight:300;letter-spacing:.06em;line-height:1;margin-bottom:20px;">—</div>
+      <div style="width:40px;height:1px;background:rgba(248,242,240,.2);margin-bottom:20px;"></div>
+      <p style="font-size:14px;opacity:.58;line-height:1.75;font-weight:300;max-width:280px;">Este código es único. Representa la combinación de fortalezas, valores y visión que solo tú tienes.</p>
+      <div style="margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-light" onclick="completePhase1()">Ver mi progreso →</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(248,242,240,.22);color:var(--cream);font-size:13px;">Descargar perfil</button>
       </div>
     </div>
     <div class="result-right">
-      <span class="tag" style="margin-bottom:28px;display:inline-block;">Análisis Sendya</span>
+      <span class="tag" style="margin-bottom:24px;display:inline-block;">Análisis Sendya</span>
       <div id="result-analysis" style="font-size:15px;font-weight:300;line-height:1.85;color:var(--brown-mid);"></div>
-      <button class="btn btn-ghost" style="font-size:12px;margin-top:24px;align-self:flex-start;" onclick="showPage('map')">Explorar siguiente fase →</button>
+      <button class="btn btn-ghost" style="font-size:12px;margin-top:20px;align-self:flex-start;" onclick="showPage('metodo')">Explorar siguiente fase →</button>
     </div>
   </div>
   <div class="mentor-strip">
@@ -669,94 +922,99 @@
 
 <!-- ═══ JS ═════════════════════════════════════════════════════════════════ -->
 <script>
-const state = { phase1Done:false, userCode:'', answers:{}, currentQ:0, selections:[], textVal:'' };
+/* ── State ── */
+const state={phase1Done:false,userCode:'',answers:{},currentQ:0,selections:[],textVal:''};
 
-const QUESTIONS = [
-  { id:1, cat:'Fortalezas', n:'01', type:'multi',
-    q:'¿Qué habilidades\nte definen mejor?',
-    hint:'Elige todas las que resuenen contigo.',
-    opts:['Resolución de problemas','Comunicación y empatía','Creatividad e innovación','Liderazgo y organización','Análisis crítico','Habilidades digitales','Trabajo en equipo','Autonomía y disciplina'] },
-  { id:2, cat:'Frustraciones', n:'02', type:'open',
-    q:'¿Qué situaciones te generan\nvacío o frustración?',
-    hint:'La honestidad aquí es la clave para encontrar tu camino real.',
-    ph:'Tareas repetitivas sin propósito, no poder aportar ideas, sensación de que tu trabajo no importa...' },
-  { id:3, cat:'Pasiones', n:'03', type:'open',
-    q:'¿Qué actividades te hacen\nperder la noción del tiempo?',
-    hint:'Sé específico/a. Cuanto más detalle, mejor tu perfil.',
-    ph:'Cuando diseño algo desde cero, cuando explico conceptos difíciles, cuando analizo datos...' },
-  { id:4, cat:'Valores', n:'04', type:'multi',
-    q:'¿Qué es lo más importante\nen tu vida profesional?',
-    hint:'Elige hasta 3 valores que no negociarías jamás.',
-    opts:['Impacto social','Autonomía','Seguridad económica','Crecimiento continuo','Creatividad','Reconocimiento','Flexibilidad','Propósito y significado'] },
-  { id:5, cat:'Visión', n:'05', type:'open',
-    q:'Sin límites económicos,\n¿a qué dedicarías tu vida?',
-    hint:'Tu respuesta más honesta vale más que cualquier test.',
-    ph:'Describe cómo sería tu vida laboral ideal en 5 años...' },
+const QUESTIONS=[
+  {id:1,cat:'Fortalezas',n:'01',type:'multi',
+   q:'¿Qué habilidades\nte definen mejor?',
+   hint:'Elige todas las que resuenen contigo.',
+   opts:['Resolución de problemas','Comunicación y empatía','Creatividad e innovación','Liderazgo y organización','Análisis crítico','Habilidades digitales','Trabajo en equipo','Autonomía y disciplina']},
+  {id:2,cat:'Frustraciones',n:'02',type:'open',
+   q:'¿Qué situaciones te generan\nvacío o frustración?',
+   hint:'La honestidad aquí es la clave para encontrar tu camino real.',
+   ph:'Tareas repetitivas sin propósito, no poder aportar ideas, sentir que mi trabajo no tiene impacto...'},
+  {id:3,cat:'Pasiones',n:'03',type:'open',
+   q:'¿Qué actividades te hacen\nperder la noción del tiempo?',
+   hint:'Sé específico/a. Cuanto más detalle, mejor tu perfil.',
+   ph:'Cuando diseño algo desde cero, cuando explico conceptos, cuando analizo datos y encuentro patrones...'},
+  {id:4,cat:'Valores',n:'04',type:'multi',
+   q:'¿Qué es lo más importante\nen tu vida profesional?',
+   hint:'Elige hasta 3 valores que no negociarías jamás.',
+   opts:['Impacto social','Autonomía','Seguridad económica','Crecimiento continuo','Creatividad','Reconocimiento','Flexibilidad','Propósito y significado']},
+  {id:5,cat:'Visión',n:'05',type:'open',
+   q:'Sin límites económicos,\n¿a qué dedicarías tu vida?',
+   hint:'Tu respuesta más honesta vale más que cualquier test.',
+   ph:'Describe cómo sería tu vida laboral ideal en 5 años...'},
 ];
 
-/* ─ Navigation ─ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-  const pm = {home:'page-home',map:'page-map',phase1:'page-phase1',test:'page-test',loading:'page-loading',result:'page-result'};
-  const nm = {home:'nav-home',map:'nav-map',phase1:'nav-home',test:'nav-home',loading:'nav-home',result:'nav-home'};
+/* ── Navigation ── */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('visible'));
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+  const pm={home:'page-home',metodo:'page-metodo',map:'page-map',phase1:'page-phase1',test:'page-test',loading:'page-loading',result:'page-result'};
+  const nm={home:'nav-home',metodo:'nav-metodo',map:'nav-map',phase1:'nav-home',test:'nav-home',loading:'nav-home',result:'nav-home'};
   document.getElementById(pm[id]).classList.add('visible');
-  const ne = document.getElementById(nm[id]); if(ne) ne.classList.add('active');
+  const ne=document.getElementById(nm[id]);if(ne)ne.classList.add('active');
   window.scrollTo(0,0);
 }
 
-/* ─ Test ─ */
-function startTest() { state.currentQ=0; state.answers={}; renderQ(); showPage('test'); }
-
-function renderQ() {
-  const q = QUESTIONS[state.currentQ];
-  state.selections=[]; state.textVal='';
-  document.getElementById('q-num').textContent  = q.n;
-  document.getElementById('q-text').textContent = q.q;
-  document.getElementById('q-hint').textContent = q.hint;
-  document.getElementById('test-category').textContent = q.cat;
-  document.getElementById('test-counter').textContent  = `${state.currentQ+1} / ${QUESTIONS.length}`;
-  document.getElementById('test-progress').style.width = `${(state.currentQ/QUESTIONS.length)*100}%`;
-  const prev = document.getElementById('btn-prev'); prev.style.display = state.currentQ>0?'inline-flex':'none';
-  const next = document.getElementById('btn-next'); next.textContent = state.currentQ<QUESTIONS.length-1?'Siguiente →':'Generar mi perfil ✦'; next.disabled=true;
-  const area = document.getElementById('q-input-area');
-  if (q.type==='open') {
-    area.innerHTML = `<textarea id="qta" rows="7" placeholder="${q.ph||''}"></textarea>`;
-    document.getElementById('qta').addEventListener('input', e => { state.textVal=e.target.value; next.disabled=state.textVal.trim().length<10; });
-  } else {
-    const g = document.createElement('div'); g.className='opts-grid';
-    q.opts.forEach(o => { const b=document.createElement('button'); b.className='option-pill'; b.textContent=o; b.onclick=()=>toggleO(o,b,next); g.appendChild(b); });
-    area.innerHTML=''; area.appendChild(g);
-  }
-  const l=document.getElementById('q-layout'); l.style.animation='none'; l.offsetHeight; l.style.animation='fadeUp .4s ease both';
+function toggleMenu(){
+  const m=document.getElementById('nav-mobile');
+  m.classList.toggle('open');
 }
 
-function toggleO(o,btn,next) {
+/* ── Test ── */
+function startTest(){state.currentQ=0;state.answers={};renderQ();showPage('test');}
+
+function renderQ(){
+  const q=QUESTIONS[state.currentQ];
+  state.selections=[];state.textVal='';
+  document.getElementById('q-num').textContent=q.n;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-hint').textContent=q.hint;
+  document.getElementById('test-category').textContent=q.cat;
+  document.getElementById('test-counter').textContent=`${state.currentQ+1} / ${QUESTIONS.length}`;
+  document.getElementById('test-progress').style.width=`${(state.currentQ/QUESTIONS.length)*100}%`;
+  const prev=document.getElementById('btn-prev');prev.style.display=state.currentQ>0?'inline-flex':'none';
+  const next=document.getElementById('btn-next');next.textContent=state.currentQ<QUESTIONS.length-1?'Siguiente →':'Generar mi perfil ✦';next.disabled=true;
+  const area=document.getElementById('q-input-area');
+  if(q.type==='open'){
+    area.innerHTML=`<textarea id="qta" rows="7" placeholder="${q.ph||''}"></textarea>`;
+    document.getElementById('qta').addEventListener('input',e=>{state.textVal=e.target.value;next.disabled=state.textVal.trim().length<10;});
+  }else{
+    const g=document.createElement('div');g.className='opts-grid';
+    q.opts.forEach(o=>{const b=document.createElement('button');b.className='option-pill';b.textContent=o;b.onclick=()=>toggleO(o,b,next);g.appendChild(b);});
+    area.innerHTML='';area.appendChild(g);
+  }
+  const l=document.getElementById('q-layout');l.style.animation='none';l.offsetHeight;l.style.animation='fadeUp .4s ease both';
+}
+
+function toggleO(o,btn,next){
   const i=state.selections.indexOf(o);
   if(i>-1){state.selections.splice(i,1);btn.classList.remove('selected');}
-  else    {state.selections.push(o);   btn.classList.add('selected');}
+  else{state.selections.push(o);btn.classList.add('selected');}
   next.disabled=state.selections.length===0;
 }
-
-function nextQ() {
+function nextQ(){
   const q=QUESTIONS[state.currentQ];
   state.answers[q.id]=q.type==='open'?state.textVal:[...state.selections];
   if(state.currentQ<QUESTIONS.length-1){state.currentQ++;renderQ();}else{analyze();}
 }
-function prevQ() { if(state.currentQ>0){state.currentQ--;renderQ();} }
+function prevQ(){if(state.currentQ>0){state.currentQ--;renderQ();}}
 
-/* ─ AI ─ */
+/* ── AI ── */
 function genCode(){const t=['SOC','TEC','CRE','LID','ANA','HUM'];const l='ABCDEFGHIJKLMNOPQRSTUVWXYZ';return`${t[~~(Math.random()*6)]}-${~~(Math.random()*900)+100}${l[~~(Math.random()*26)]}`;}
 
-async function analyze() {
+async function analyze(){
   showPage('loading');
-  const code=genCode(); state.userCode=code;
+  const code=genCode();state.userCode=code;
   const sys=`Eres un coach vocacional del Método Sendya. Genera un análisis empoderador en español con exactamente estos 4 bloques (título en MAYÚSCULAS seguido de dos puntos):\n\nPERFIL: Una frase poderosa de 1-2 líneas que resume la esencia profesional del usuario.\nFORTALEZAS CLAVE: 2-3 fortalezas específicas, no genéricas.\nZONA DE PROPÓSITO: Qué tipo de trabajo o misión le daría significado real.\nPRÓXIMA ACCIÓN: Una sola acción concreta para esta semana.\n\nMáximo 170 palabras. Tono cercano y empoderador. Solo texto plano, sin asteriscos.`;
   const msg=`Código:${code}\nHabilidades:${JSON.stringify(state.answers[1])}\nFrustraciones:${state.answers[2]}\nPasiones:${state.answers[3]}\nValores:${JSON.stringify(state.answers[4])}\nVisión:${state.answers[5]}`;
-  try {
+  try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:msg}]})});
-    const d=await r.json(); state.userAnalysis=d.content?.[0]?.text||fallback();
-  } catch{ state.userAnalysis=fallback(); }
+    const d=await r.json();state.userAnalysis=d.content?.[0]?.text||fallback();
+  }catch{state.userAnalysis=fallback();}
   document.getElementById('result-code').textContent=state.userCode;
   renderAnalysis(state.userAnalysis);
   showPage('result');
@@ -764,8 +1022,8 @@ async function analyze() {
 
 function fallback(){return`PERFIL: Una persona con una combinación única de habilidades analíticas y humanas, lista para encontrar su propósito profesional.\n\nFORTALEZAS CLAVE: Capacidad de conexión genuina, pensamiento crítico orientado a soluciones y alta orientación al impacto.\n\nZONA DE PROPÓSITO: Roles donde la creatividad y la ayuda a otros se fusionan con resultados concretos.\n\nPRÓXIMA ACCIÓN: Dedica 30 minutos hoy a escribir 3 momentos en los que sentiste que "eso era lo tuyo".`;}
 
-function renderAnalysis(txt) {
-  const c=document.getElementById('result-analysis'); c.innerHTML='';
+function renderAnalysis(txt){
+  const c=document.getElementById('result-analysis');c.innerHTML='';
   txt.split('\n\n').filter(b=>b.trim()).forEach(b=>{
     const ci=b.indexOf(':');
     if(ci>-1&&ci<30){const ti=b.substring(0,ci).trim();const bo=b.substring(ci+1).trim();if(ti===ti.toUpperCase()&&ti.length>2){const w=document.createElement('div');w.className='profile-block';w.innerHTML=`<div class="profile-label">${ti}</div><div class="profile-body">${bo}</div>`;c.appendChild(w);return;}}
@@ -773,31 +1031,31 @@ function renderAnalysis(txt) {
   });
 }
 
-function completePhase1() {
+function completePhase1(){
   state.phase1Done=true;
-  const p1=document.getElementById('map-p1'); p1.classList.add('done');
+  const p1=document.getElementById('map-p1');p1.classList.add('done');
   if(!p1.querySelector('.phase-badge')){const b=document.createElement('div');b.className='phase-badge done-badge';b.textContent='Completada';p1.prepend(b);}
   document.getElementById('map-p2').classList.remove('locked');
   document.getElementById('map-progress').style.width='35%';
-  const cb=document.getElementById('map-code-box'); cb.style.display='block';
+  const cb=document.getElementById('map-code-box');cb.style.display='block';
   document.getElementById('map-code-display').textContent=state.userCode;
   showPage('map');
 }
 
-/* ─ Modal ─ */
-function openModal() {
+/* ── Modal ── */
+function openModal(){
   document.getElementById('mentor-modal').classList.add('open');
   document.body.style.overflow='hidden';
   if(state.userCode){const f=document.getElementById('m-fase');if(f)f.value='Fase 01 — Autoconocimiento';}
 }
-function closeMentorModal(e) {
+function closeMentorModal(e){
   if(e&&e.target!==document.getElementById('mentor-modal'))return;
   document.getElementById('mentor-modal').classList.remove('open');
   document.body.style.overflow='';
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('mentor-modal').classList.remove('open');document.body.style.overflow='';}});
 
-async function submitForm() {
+async function submitForm(){
   const nombre=document.getElementById('m-nombre').value.trim();
   const apell=document.getElementById('m-apellido').value.trim();
   const email=document.getElementById('m-email').value.trim();
@@ -806,17 +1064,17 @@ async function submitForm() {
   const err=document.getElementById('form-error');
   if(!nombre||!apell||!email||!perfil||!rgpd){
     err.textContent=!rgpd?'Debes aceptar la política de privacidad para continuar.':'Por favor completa todos los campos obligatorios (*).';
-    err.classList.add('show'); err.scrollIntoView({behavior:'smooth',block:'nearest'}); return;
+    err.classList.add('show');err.scrollIntoView({behavior:'smooth',block:'nearest'});return;
   }
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Introduce un correo electrónico válido.';err.classList.add('show');return;}
   err.classList.remove('show');
   const btn=document.getElementById('btn-submit'),sp=document.getElementById('sub-spin');
   btn.disabled=true;btn.style.opacity='.5';sp.style.display='block';
-  try {
+  try{
     const res=await fetch('https://formspree.io/f/xdabnkda',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({nombre,apellidos:apell,email,telefono:document.getElementById('m-tel').value.trim(),perfil,fase_completada:document.getElementById('m-fase').value,codigo_sendya:state.userCode||'—',mensaje:document.getElementById('m-msg').value.trim(),rgpd_base:'Sí',rgpd_comercial:document.getElementById('rgpd-com').checked?'Sí':'No'})});
     if(res.ok){document.getElementById('form-wrap').style.display='none';document.getElementById('form-success').classList.add('show');}
     else throw new Error();
-  } catch{err.textContent='Error al enviar. Por favor inténtalo de nuevo.';err.classList.add('show');btn.disabled=false;btn.style.opacity='1';sp.style.display='none';}
+  }catch{err.textContent='Error al enviar. Por favor inténtalo de nuevo.';err.classList.add('show');btn.disabled=false;btn.style.opacity='1';sp.style.display='none';}
 }
 
 showPage('home');
